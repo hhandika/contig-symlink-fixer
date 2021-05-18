@@ -6,9 +6,9 @@ use walkdir::WalkDir;
 
 fn main() {
     let path = ".";
-    println!("Fixing symplink");
+    println!("Fixing symplink...\n");
     find_contigs(path);
-    println!("DONE!");
+    println!("\nDONE!");
 }
 
 fn find_contigs(path: &str) {
@@ -39,7 +39,7 @@ fn create_symlink(path: &Path, contig_sym: &Path) {
     let sympath = path.canonicalize().expect("CAN'T CANOCALIZE PATH");
     unix::fs::symlink(&sympath, contig_sym).expect("CAN'T CREATE SYMLINK");
     println!(
-        "{} -> {}",
+        "{} \x1b[0;36m => \x1b[0m {}",
         sympath.to_string_lossy(),
         contig_sym.to_string_lossy()
     );
