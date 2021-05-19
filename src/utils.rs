@@ -7,7 +7,7 @@ use walkdir::WalkDir;
 pub fn generate_symlink_all(path: &str) -> u32 {
     let symdir = Path::new("contig_symlink_fix");
     fs::create_dir_all(symdir).expect("CAN'T CREATE SYMLINK FOLDER.");
-    let mut change_count = 0;
+    let mut counts = 0;
 
     WalkDir::new(path)
         .into_iter()
@@ -18,11 +18,11 @@ pub fn generate_symlink_all(path: &str) -> u32 {
             if fname.ends_with("/contigs.fasta") {
                 let path = PathBuf::from(fname);
                 create_symlink(&path, &symdir);
-                change_count += 1;
+                counts += 1;
             }
         });
     
-    change_count
+    counts
 }
 
 fn create_symlink(path: &Path, symdir: &Path) {
