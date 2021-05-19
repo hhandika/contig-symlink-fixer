@@ -7,13 +7,15 @@ use walkdir::WalkDir;
 fn main() {
     let path = ".";
     println!("Fixing symplink...\n");
-    find_contigs(path);
+    let count = find_contigs(path);
     println!("\nDONE!");
+    println!("Total symlinks: {}", count);
 }
 
-fn find_contigs(path: &str) {
+fn find_contigs(path: &str) -> u32 {
     let symdir = Path::new("contig_symlink_fix");
     fs::create_dir_all(symdir).expect("CAN'T CREATE SYMLINK FOLDER.");
+    let mut change_count = 0;
 
     WalkDir::new(path)
         .into_iter()
@@ -24,8 +26,11 @@ fn find_contigs(path: &str) {
             if fname.ends_with("/contigs.fasta") {
                 let path = PathBuf::from(fname);
                 create_symlink(&path, &symdir);
+                change_count += 1;
             }
         });
+    
+    change_count
 }
 
 fn create_symlink(path: &Path, symdir: &Path) {
