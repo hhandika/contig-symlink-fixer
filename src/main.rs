@@ -6,10 +6,10 @@ use walkdir::WalkDir;
 
 fn main() {
     let path = ".";
-    println!("Fixing symplink...\n");
+    println!("\x1b[0;44m === Generating symplink... === \x1b[0m\n");
     let count = find_contigs(path);
-    println!("\nDONE!");
-    println!("Total symlinks: {}", count);
+    println!("\n\x1b[0;42m DONE! \x1b[0m");
+    println!("Total symlinks created: {}", count);
 }
 
 fn find_contigs(path: &str) -> u32 {
@@ -42,7 +42,7 @@ fn create_symlink(path: &Path, symdir: &Path) {
     unix::fs::symlink(&sympath, &contig_sym).expect("CAN'T CREATE SYMLINK");
     
     println!(
-        "{} \x1b[0;36m => \x1b[0m {}",
+        "{} \x1b[0;44m => \x1b[0m {}",
         sympath.to_string_lossy(),
         contig_sym.to_string_lossy()
     );
