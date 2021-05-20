@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
 
 pub fn generate_symlink_all(path: &str) -> u32 {
-    let symdir = Path::new("contig_symlink_fix");
+    let symdir = Path::new("contig_symlink");
     fs::create_dir_all(symdir).expect("CAN'T CREATE SYMLINK FOLDER.");
     let mut counts = 0;
 
