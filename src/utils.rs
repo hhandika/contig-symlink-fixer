@@ -21,7 +21,6 @@ pub fn generate_symlink_all(path: &str) -> u32 {
                 counts += 1;
             }
         });
-    
     counts
 }
 
@@ -32,7 +31,6 @@ fn create_symlink(path: &Path, symdir: &Path) {
     let sympath = path.canonicalize().expect("CAN'T CANOCALIZE PATH");
 
     unix::fs::symlink(&sympath, &contig_sym).expect("CAN'T CREATE SYMLINK");
-    
     println!(
         "{} \x1b[0;45m => \x1b[0m {}",
         sympath.to_string_lossy(),
@@ -45,7 +43,6 @@ fn get_fname(path: &Path) -> PathBuf {
     assert!(dirs.len() > 1, "INVALID FOLDER STRUCTURE");
     let mut fname = PathBuf::from(String::from(dirs[1].to_string_lossy()));
     fname.set_extension(path.extension().unwrap());
-    
     fname
 }
 
@@ -54,7 +51,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn output_fname_test(){
+    fn output_fname_test() {
         let path = Path::new("./Species_epithet_ABCD123425/contigs.fasta");
         let res = PathBuf::from("Species_epithet_ABCD123425.fasta");
 

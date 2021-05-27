@@ -7,5 +7,3 @@ fn main() {
     println!("\n\x1b[0;42m DONE! \x1b[0m");
     println!("Total symlinks created: {}", count);
 }
-
-
