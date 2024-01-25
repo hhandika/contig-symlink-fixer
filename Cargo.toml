@@ -1,6 +1,6 @@
 [package]
 name = "contig-symlink-fixer"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["hhandika"]
 edition = "2018"
 
